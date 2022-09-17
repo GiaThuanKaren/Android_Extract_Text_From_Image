@@ -21,8 +21,8 @@ app.use("/", (req, res) => {
 
 io.on("connection", function (socket) {
   console.log(socket.id);
-  EventFromSocket.SendText(socket); 
- 
+  EventFromSocket.SendText(socket);
+  EventFromSocket.CreateNewSession(socket);
 });
 
 server.listen(PORT, () => {

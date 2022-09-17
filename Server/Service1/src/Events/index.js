@@ -16,11 +16,18 @@ const EventFromSocket = {
   },
   SendText: function (socket) {
     socket.on("send-text", (data, id) => {
+      socket.emit("pass_text");
       console.log(data, id);
     });
   },
   ReciveText: function (socket) {
     socket.on("recive-text", (data, id) => {});
+  },
+  CreateNewSession: function (socket) {
+    socket.on("join-room", (room) => {
+      console.log(room, "Joined");
+      socket.join(room);
+    });
   },
 };
 
