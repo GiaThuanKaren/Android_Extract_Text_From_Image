@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const http = require("http");
-const {Server} = require("socket.io");
+const { Server } = require("socket.io");
 const cors = require("cors");
 const { EventFromSocket } = require("./src/Events");
 
@@ -12,7 +12,7 @@ const io = new Server(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
-    credentials: true
+    credentials: true,
   },
 });
 app.use("/", (req, res) => {
@@ -21,11 +21,8 @@ app.use("/", (req, res) => {
 
 io.on("connection", function (socket) {
   console.log(socket.id);
-  EventFromSocket.SendMessage(socket);
-  socket.on("join-room", (room) => {
-    console.log(room, "Joined");
-    socket.join(room);
-  });
+  EventFromSocket.SendText(socket); 
+ 
 });
 
 server.listen(PORT, () => {

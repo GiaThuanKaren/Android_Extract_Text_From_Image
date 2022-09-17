@@ -14,6 +14,14 @@ const EventFromSocket = {
       console.log(data);
     });
   },
+  SendText: function (socket) {
+    socket.on("send-text", (data, id) => {
+      console.log(data, id);
+    });
+  },
+  ReciveText: function (socket) {
+    socket.oon("recive-text", (data, id) => {});
+  },
 };
 
 module.exports = { EventFromSocket };
