@@ -20,7 +20,7 @@ const EventFromSocket = {
     });
   },
   ReciveText: function (socket) {
-    socket.oon("recive-text", (data, id) => {});
+    socket.on("recive-text", (data, id) => {});
   },
 };
 
