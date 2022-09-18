@@ -192,6 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void MoveToLoginScreen(){
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => MyHomePage2()));
   }
+
   void GetConnectionSocket() {
     const URLServer = 'http://192.168.1.5:5000';
     socket = IO.io(

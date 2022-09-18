@@ -4,6 +4,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const { EventFromSocket } = require("./src/Events");
+const Routes = require("./src/Routes");
 
 const PORT = process.env.PORT || 5000;
 app.use(cors());
@@ -18,6 +19,8 @@ const io = new Server(server, {
 app.use("/", (req, res) => {
   res.send("...");
 });
+
+Routes(app, io);
 
 io.on("connection", function (socket) {
   console.log(socket.id);

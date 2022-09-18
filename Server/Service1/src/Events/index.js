@@ -26,7 +26,7 @@ const EventFromSocket = {
   CreateNewSession: function (socket) {
     socket.on("join-room", (room) => {
       console.log(room, "Joined");
-      socket.join(room);
+      // socket.join(room);
     });
   },
 };

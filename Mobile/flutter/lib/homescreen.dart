@@ -74,8 +74,9 @@ class _MyHomePageState extends State<MyHomePage2> {
           height: 45.0,
           child: RaisedButton(
             onPressed: () {
+              print("Join Room Press");
               // print(emailTextEdit.value.text + " " + passwordTextEdit.value.text);
-              ;
+              HandleJoinRoom(codeNumberText.value.text);
             },
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -98,7 +99,10 @@ class _MyHomePageState extends State<MyHomePage2> {
       ],
     );
   }
-
+  void HandleJoinRoom(String idRoom){
+    print(socket?.disconnected);
+    socket?.emit("join-room",idRoom);
+  }
   Widget getTextEdit(
       TextEditingController controller, String hint, Icon leftIcon,
       {TextInputType inputType = TextInputType.text, bool isPassword = false}) {
@@ -175,7 +179,8 @@ class _MyHomePageState extends State<MyHomePage2> {
 
   @override
   void initState() {
-    // GetConnectionSocket();
+    print("Connecting Login Screen");
+    GetConnectionSocket();
     super.initState();
   }
 }
