@@ -16,7 +16,9 @@ function App() {
     <>
       <MenuAppBar />
       <Container>
-        <Typography fontWeight={500} style={{ whiteSpace: "pre-line" }}>{TextSocket}</Typography>
+        <Typography fontWeight={500} style={{ whiteSpace: "pre-line" }}>
+          {TextSocket}
+        </Typography>
       </Container>
     </>
   );
