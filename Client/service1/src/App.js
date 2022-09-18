@@ -10,7 +10,8 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Modal from "@mui/material/Modal";
 import { Generate_code } from "./utlls/generate_code";
-
+import { ReactComponent as IconSVG1 } from "./svg1.svg";
+import { ReactComponent as IconSVG2 } from "./svg2.svg";
 const style = {
   position: "absolute",
   top: "50%",
@@ -25,14 +26,14 @@ const style = {
 
 function App() {
   const [TextSocket, SetTextSocket] = useState("");
-  const CodeID =Generate_code();
+  const CodeID = Generate_code();
   const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleJoinRoom = ()=>{
-    socket.emit("join-room",CodeID)
+  const handleJoinRoom = () => {
+    socket.emit("join-room", CodeID);
     setOpen(false);
-  }
+  };
   useEffect(() => {
     socket.on("pass_text", (message) => {
       console.log(message);
@@ -42,7 +43,6 @@ function App() {
   return (
     <>
       <div>
-        <Button onClick={handleOpen}>Open modal</Button>
         <Modal
           open={open}
           onClose={handleClose}
@@ -50,8 +50,16 @@ function App() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
+            <Typography
+              height={"100px"}
+              // lineHeight={"100px"}
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+            >
+              <IconSVG1 />
+              Welcome To My Website !!!!!
+              <IconSVG2 />
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               {`Join with this id ${CodeID}`}
@@ -69,6 +77,8 @@ function App() {
       </div>
 
       <MenuAppBar />
+      <Button onClick={handleOpen}>Get New Code</Button>
+
       <Container>
         <Typography fontWeight={500} style={{ whiteSpace: "pre-line" }}>
           {TextSocket}
