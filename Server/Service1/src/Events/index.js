@@ -17,7 +17,7 @@ const EventFromSocket = {
   SendText: function (socket) {
     socket.on("send-text", (data, id) => {
       socket.broadcast.emit("pass_text",data);
-      // console.log(data, id);
+      console.log(data, id);
     });
   },
   ReciveText: function (socket) {
