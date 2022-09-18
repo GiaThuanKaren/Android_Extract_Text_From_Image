@@ -5,6 +5,7 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 // import 'package:socket_io/socket_io.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:text_recognition/homescreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // FloatingActionButton()
                 if (textScanning) const CircularProgressIndicator(),
                 if (!textScanning && imageFile == null)
                   Container(
@@ -78,8 +80,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(8.0)),
                           ),
                           onPressed: () {
-                            // getImage(ImageSource.gallery);
-                            GetConnectionSocket();
+                            getImage(ImageSource.gallery);
+
+
                             print("Get COnnecttion");
                           },
                           child: Container(
@@ -135,6 +138,41 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         )),
+                    Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 5),
+                        padding: const EdgeInsets.only(top: 10),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            onPrimary: Colors.grey,
+                            shadowColor: Colors.grey[400],
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                          ),
+                          onPressed: () {
+                            print("Move To Code Screen");
+                            MoveToLoginScreen();
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 5),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.login,
+                                  size: 30,
+                                ),
+                                Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      fontSize: 13, color: Colors.grey[600]),
+                                )
+                              ],
+                            ),
+                          ),
+                        )),
                   ],
                 ),
                 const SizedBox(
@@ -151,7 +189,9 @@ class _MyHomePageState extends State<MyHomePage> {
       )),
     );
   }
-
+  void MoveToLoginScreen(){
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => MyHomePage2()));
+  }
   void GetConnectionSocket() {
     const URLServer = 'http://192.168.1.5:5000';
     socket = IO.io(

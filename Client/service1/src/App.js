@@ -3,17 +3,23 @@ import "./App.css";
 import { MenuAppBar } from "./Components";
 import { Container } from "@mui/material";
 import { socket } from "./utlls/socket";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 function App() {
+  const [TextSocket,SetTextSocket]=useState("");
   useEffect(() => {
-    socket.on("send-text", (message) => {
+    socket.on("pass_text", (message) => {
       console.log(message);
+      SetTextSocket(message);
     });
   }, [socket]);
   return (
     <>
       <MenuAppBar />
-      <Container>{/* <h3>ahskjldh</h3> */}</Container>
+      <Container>
+        <p>
+          {TextSocket}
+        </p>
+      </Container>
     </>
   );
 }
