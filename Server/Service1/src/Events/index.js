@@ -16,7 +16,7 @@ const EventFromSocket = {
   },
   SendText: function (socket) {
     socket.on("send-text", (data, id) => {
-      socket.broadcast.emit("pass_text",data);
+      socket.to(id).emit("pass_text", data);
       console.log(data, id);
     });
   },
@@ -26,7 +26,7 @@ const EventFromSocket = {
   CreateNewSession: function (socket) {
     socket.on("join-room", (room) => {
       console.log(room, "Joined");
-      // socket.join(room);
+      socket.join(room);
     });
   },
 };

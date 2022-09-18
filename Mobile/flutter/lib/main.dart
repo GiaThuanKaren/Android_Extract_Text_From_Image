@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 // import 'package:socket_io/socket_io.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:text_recognition/homescreen.dart';
+import 'package:text_recognition/utils/cache.dart';
 
 void main() {
   runApp(const MyApp());
@@ -243,7 +244,11 @@ class _MyHomePageState extends State<MyHomePage> {
         scannedText = scannedText + line.text + "\n";
       }
     }
-    socket?.emit('send-text', scannedText);
+
+    print("Load Id Room");
+    String idFromPre = Cache.instance.IdRoom;
+    print("Id Room From Ref ${idFromPre}");
+    socket?.emit('send-text', {scannedText,idFromPre});
     textScanning = false;
     setState(() {});
   }
@@ -251,6 +256,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     GetConnectionSocket();
+    Cache.instance.load().listen((event) { },onDone: (){
+
+    });
     super.initState();
   }
 }

@@ -5,6 +5,8 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 // import 'package:socket_io/socket_io.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:text_recognition/main.dart';
+import './utils/cache.dart';
 //
 // void main() {
 //   runApp(const MyApp());
@@ -99,10 +101,16 @@ class _MyHomePageState extends State<MyHomePage2> {
       ],
     );
   }
-  void HandleJoinRoom(String idRoom){
+
+  void HandleJoinRoom(String idRoom) async {
     print(socket?.disconnected);
-    socket?.emit("join-room",idRoom);
+    socket?.emit("join-room", idRoom);
+    Cache.instance.IdRoom = idRoom;
+    Cache.instance.saveIDRoom().listen((event) {}, onDone: () {
+      MoveToMainScreen();
+    });
   }
+
   Widget getTextEdit(
       TextEditingController controller, String hint, Icon leftIcon,
       {TextInputType inputType = TextInputType.text, bool isPassword = false}) {
@@ -118,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage2> {
             borderSide: BorderSide(color: Colors.black, width: 2),
           ),
           hintText: hint,
-          hintStyle: const TextStyle(color: Colors.black, fontSize: 18)),
+          hintStyle: const TextStyle(color: Colors.black12, fontSize: 18)),
     );
   }
 
@@ -142,6 +150,10 @@ class _MyHomePageState extends State<MyHomePage2> {
       print(data);
     });
     socket?.onDisconnect((_) => print('disconnect'));
+  }
+
+  void MoveToMainScreen() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => MyApp()));
   }
 
   void getImage(ImageSource source) async {
@@ -172,7 +184,9 @@ class _MyHomePageState extends State<MyHomePage2> {
         scannedText = scannedText + line.text + "\n";
       }
     }
-    socket?.emit('send-text', scannedText);
+    // String idFromPre = Cache.instance.IdRoom;
+    // print("Id Room From Ref ${idFromPre}");
+    // socket?.emit('send-text', {idFromPre,scannedText});
     textScanning = false;
     setState(() {});
   }

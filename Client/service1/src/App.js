@@ -26,11 +26,12 @@ const style = {
 function App() {
   const [TextSocket, SetTextSocket] = useState("");
   const CodeID =Generate_code();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleJoinRoom = ()=>{
     socket.emit("join-room",CodeID)
+    setOpen(false);
   }
   useEffect(() => {
     socket.on("pass_text", (message) => {
