@@ -6,7 +6,7 @@ const cors = require("cors");
 const { EventFromSocket } = require("./src/Events");
 const Routes = require("./src/Routes");
 
-const PORT = process.env.PORT || 5000;
+const PORT = 443;
 app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
