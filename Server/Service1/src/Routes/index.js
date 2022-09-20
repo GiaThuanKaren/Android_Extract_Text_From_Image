@@ -4,6 +4,10 @@ const Routes = function(app,IoSocket){
             console.log(socket.id);
         })
     })
+    app.get("/",(req,res)=>{
+        res.send("Hi This Is Init Route");
+    })
+
 }
 
 module.exports = Routes

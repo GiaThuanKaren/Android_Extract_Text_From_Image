@@ -131,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage2> {
   }
 
   void GetConnectionSocket() {
-    const URLServer = 'http://192.168.1.5:5000';
+    const URLServer = 'http://192.168.31.184:5000';
     socket = IO.io(
         URLServer,
         IO.OptionBuilder()

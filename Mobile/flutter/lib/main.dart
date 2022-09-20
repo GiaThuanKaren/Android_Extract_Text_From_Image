@@ -46,8 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Text Recognition example"),
+        // centerTitle: true,
+        backgroundColor: Colors.deepPurpleAccent,
+        title: const Text("Extract Text From Image Demo"),
       ),
       body: Center(
           child: SingleChildScrollView(
@@ -195,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void GetConnectionSocket() {
-    const URLServer = 'http://192.168.1.5:5000';
+    const URLServer = 'http://192.168.31.184:5000';
     socket = IO.io(
         URLServer,
         IO.OptionBuilder()
