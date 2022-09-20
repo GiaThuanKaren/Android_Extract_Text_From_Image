@@ -6,18 +6,19 @@ const cors = require("cors");
 const { EventFromSocket } = require("./src/Events");
 const Routes = require("./src/Routes");
 
-const PORT = 443;
+const PORT = process.env.PORT || 443;
 app.use(cors());
 const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
-});
-app.use("/", (req, res) => {
-  res.send("...");
+// const io = new Server(server, {
+//   cors: {
+//     origin: "*",
+//     methods: ["GET", "POST"],
+//     credentials: true,
+//   },
+// });
+const io = require("socket.io")(server);
+app.get("/", (req, res) => {
+  res.send("Hi This Is Init Route");
 });
 
 Routes(app, io);
